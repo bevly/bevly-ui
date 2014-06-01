@@ -5,6 +5,7 @@ require! jade: 'gulp-jade'
 require! rename: 'gulp-rename'
 require! express
 require! httpRewrite: 'http-rewrite-middleware'
+require
 
 appDist = './dist/app'
 appStub = './dist/stub'
@@ -44,7 +45,6 @@ gtask 'stub', ->
   gsrc './stub/**/*', base: './stub'
     .pipe gulp.dest(appStub)
 
-
 gtask 'server', ['build'] ->
   server = express()
   rewriteRules =
@@ -57,3 +57,10 @@ gtask 'server', ['build'] ->
   
   liveServer = server.listen 3000, ->
     console.log("Started server on port #{liveServer.address().port}")
+
+gtask 'watch', ['server'] ->
+  gulp.watch ['./app/js/**/*.ls'], ['livescript']
+  gulp.watch ['bower_components/**/*'], ['vendor']
+  gulp.watch ['app/css/**/*.scss'], ['sass']
+  gulp.watch ['app/**/*.jade'], ['jade']
+  gulp.watch ['stub/**/*'], ['stub']

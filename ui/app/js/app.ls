@@ -1,13 +1,15 @@
 angular.module("DrinkMenu", [])
   .service 'Drink', ->
     rating: (drink) ->
-      if it.ratingScore? && it.ratingScore > 0
-        it.ratingScore
+      if drink.ratingScore? && drink.ratingScore > 0
+        drink.ratingScore
       else null
         
     ratingDescription: (drink) ->
       rating = @rating(drink)
-      if rating then "BA: #{rating}" else ''
+      res = if rating then "BA: #{rating}" else ''
+      console.log("Returning rating description: #{res}")
+      res
 
     abvDescription: (drink) -> "#{drink.abv}%"
   
@@ -27,8 +29,8 @@ angular.module("DrinkMenu", [])
         key = $scope.ordering.key
         if angular.isArray(key) then key[0] else key
 
-      $scope.selectedCls = (key) ->
-        if key == $scope.orderKey() then 'selected' else ''
+      $scope.sortSelected = (key) ->
+        key == $scope.orderKey()
 
       subsortByName = (key, reverse) ->
         [key, if reverse then '-name' else 'name']

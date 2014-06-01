@@ -1,0 +1,120 @@
+$border: #ccc;
+$controlBackground: #fff;
+$selectedControlBackground: #e0e0e0;
+$drinkBackground: #fdfdfd;
+$drinkBorder: #eee;
+$abvColor: #a55;
+$ratingColor: #5a5;
+$typeColor: #888;
+
+body, html {
+  padding: 0;
+  margin: 0;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Sans-Serif';
+  font-size: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+a {
+  color: #558;
+  text-decoration: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 0.8em;
+  
+  h1 {
+    text-align: center;
+    margin: 0.4em 0;
+  }
+}
+
+ul.controls {
+  display: inline-block;
+  background: $controlBackground;
+  border-radius: 1em;
+  border: 1px solid $border;
+  overflow: hidden;
+  
+  li {
+    display: inline-block;
+    list-style-type: none;
+    border-right: 1px solid $border;
+
+    &.selected {
+      background: $selectedControlBackground;
+      a {
+        color: #000;
+        font-weight: bold;
+      }
+    }
+
+    &.last {
+      border-right: 0;
+    }
+
+    a {
+      display: block;
+      padding: 1em 1.5em;
+      text-decoration: none;
+      color: #333;
+    }
+  }
+}
+
+#drink-list {
+  .drink {
+    background: $drinkBackground;
+    border-top: 1px solid $drinkBorder;
+    font-size: 10px;
+    padding: 1.3em 1.2em 1.3em 2em;
+    min-height: 4.6em;
+
+    &.last {
+      border-bottom: 1px solid $border;
+    }
+
+    .name {
+      display: block;
+      float: left;
+    }
+    
+    .annotation {
+      display: block;
+      float: right;
+    }
+
+    .type {
+      clear: both;
+      float: left;
+      color: $typeColor;
+    }
+
+    .rating {
+      color: $ratingColor;
+      right: 2em;
+      top: 1em;
+      padding-right: 0.7em;
+    }
+    
+    .stat {
+      color: $abvColor;
+      right: 2em;
+      bottom: 1em;
+    }
+  }
+}
