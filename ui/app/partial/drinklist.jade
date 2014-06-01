@@ -1,0 +1,18 @@
+.drinklist(ng-controller="Drinks")
+  section.header
+    h1 {{source.name}} Beer List
+
+    ul.controls
+      li(ng-repeat="sorter in sorters"
+         ng-class="selectedCls(sorter.key)")
+        a.sorter(ng-click="sort(sorter.key, sorter.reverse)" href="#")
+          | {{sorter.title}}
+
+  ul#drink-list
+    li.drink(ng-repeat="drink in drinks | orderBy:ordering.key:ordering.reverse")
+      .bio
+        a.name(href="{{drink.externalLink}}") {{drink.name}}
+        .type {{drink.type || '&nbsp;'}}
+      .annotation
+        .rating {{Drink.ratingDescription(drink)}}
+        .stat {{Drink.abvDescription(drink)}}

@@ -2,11 +2,19 @@
   "name": "bevly-ui",
   "version": "1.0.0",
   "license": "BSD",
-  "dependencies": {
-    "express": "4.4.x"
-  },
   "devDependencies": {
-    "gulp": "^3.6.2",
-    "gulp-sass": "^0.7.1"
+    "express": "4.4.x",
+    "gulp": "^3.7.0",
+    "gulp-sass": "^0.7.1",
+    "gulp-clean": "^0.3.0",
+    "gulp-util": "^2.2.14",
+    "gulp-concat": "^2.2.0",
+    "gulp-browserify": "^0.5.0",
+    "gulp-jade": "^0.5.0",
+    "browserify-livescript": "0.0.2",
+    "gulp-livescript": "^0.3.0",
+    "LiveScript": "^1.2.0",
+    "gulp-rename": "^1.2.0",
+    "http-rewrite-middleware": "^0.1.5"
   }
 }
