@@ -16,5 +16,9 @@
     "LiveScript": "^1.2.0",
     "gulp-rename": "^1.2.0",
     "http-rewrite-middleware": "^0.1.5"
+  },
+
+  "scripts": {
+    "start": "node ./node_modules/gulp/bin/gulp.js watch"
   }
 }
