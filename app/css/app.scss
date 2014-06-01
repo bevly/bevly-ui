@@ -70,6 +70,7 @@ ul.controls {
     a {
       display: block;
       padding: 1em 1.5em;
+      width: 6.5em;
       text-decoration: none;
       color: #333;
     }
@@ -89,6 +90,7 @@ ul.controls {
     }
 
     .name {
+      font-weight: bold;
       display: block;
       float: left;
     }
@@ -108,7 +110,6 @@ ul.controls {
       color: $ratingColor;
       right: 2em;
       top: 1em;
-      padding-right: 0.7em;
     }
     
     .stat {

@@ -11,7 +11,9 @@
   ul#drink-list
     li.drink(ng-repeat="drink in drinks | orderBy:ordering.key:ordering.reverse")
       a.name(href="{{drink.externalLink}}") {{drink.name}}
-      .annotation.rating {{Drink.ratingDescription(drink) || ''}}
+      .annotation
+        .stat {{Drink.abvDescription(drink) || ''}}
         
       .type {{drink.type || '&nbsp;'}}
-      .annotation.stat {{Drink.abvDescription(drink) || ''}}
+      .annotation
+        .rating {{Drink.ratingDescription(drink) || ''}}
