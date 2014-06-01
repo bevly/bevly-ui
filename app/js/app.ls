@@ -1,4 +1,4 @@
-angular.module("DrinkMenu", ['ngRoute'])
+angular.module("DrinkMenu", [])
   .service 'UrlSort', ['$location', ($location) ->
     sortId: ->
       ($location.path() || 'name').replace(/^\//, '')
