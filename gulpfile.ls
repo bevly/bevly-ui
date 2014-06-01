@@ -58,6 +58,8 @@ gtask 'server', ['build'] ->
   liveServer = server.listen 3000, ->
     console.log("Started server on port #{liveServer.address().port}")
 
+gtask 'serve', ['server']    
+
 gtask 'watch', ['server'] ->
   gulp.watch ['./app/js/**/*.ls'], ['livescript']
   gulp.watch ['bower_components/**/*'], ['vendor']
