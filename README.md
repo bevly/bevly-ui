@@ -21,3 +21,7 @@ Installing [Gulp](http://gulpjs.com/) globally helps with running individual
 tasks:
 
     $ npm install -g gulp
+
+# Legal
+
+Licensed under the MIT license. See LICENSE for full license text.
