@@ -92,6 +92,10 @@ ul.controls {
     .name {
       font-weight: bold;
       display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 20em;
       float: left;
     }
     
