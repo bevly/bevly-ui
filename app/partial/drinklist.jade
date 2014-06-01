@@ -1,11 +1,11 @@
-.drinklist(ng-controller="Drinks")
+.drinklist(ng-controller="DrinkController")
   section.header
     h1 {{source.name}} Beer List
 
     ul.controls
       li(ng-repeat="sorter in sorters"
-         ng-class="{selected: sortSelected(sorter.key), last: $last}")
-        a.sorter(ng-click="sort(sorter.key, sorter.reverse)" href="#")
+         ng-class="{selected: sortSelected(sorter.id), last: $last}")
+        a.sorter(href="#/{{sorter.id}}")
           | {{sorter.title}}
 
   ul#drink-list
