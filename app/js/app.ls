@@ -1,10 +1,14 @@
 angular.module("DrinkMenu", [])
-  .service 'UrlSort', ['$location', ($location) ->
+  .factory 'UrlSort', ['$location', ($location) ->
     sortId: ->
       ($location.path() || 'name').replace(/^\//, '')
   ]
 
-  .service 'Drink', ->
+  .factory 'DrinkApi', ['$http', ($http) ->
+    getDrinks: -> $http.get('/api/frisco/drink/')
+  ]
+
+  .factory 'Drink', ->
     rating: (drink) ->
       if drink.ratingScore? && drink.ratingScore > 0
         drink.ratingScore
@@ -16,14 +20,14 @@ angular.module("DrinkMenu", [])
 
     abvDescription: (drink) -> "#{drink.abv}% ABV"
   
-  .controller "DrinkController", ['$scope', '$http', '$location', 'Drink',
-    'UrlSort',
-    ($scope, $http, $location, Drink, UrlSort) !->
+  .controller "DrinkController", ['$scope', '$location', 'Drink',
+    'UrlSort', 'DrinkApi',
+    ($scope, $location, Drink, UrlSort, DrinkApi) !->
       $scope.Drink = Drink
       
       $scope.drinks = []
 
-      $http.get('/api/frisco/drink/')
+      DrinkApi.getDrinks()
         .success (data) ->
           $scope.drinks = data.drinks
 
