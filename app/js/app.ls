@@ -5,7 +5,7 @@ angular.module("DrinkMenu", [])
   ]
 
   .factory 'DrinkApi', ['$http', ($http) ->
-    getDrinks: -> $http.get('/api/frisco/drink/')
+    getDrinks: -> $http.get('/api/bevly/frisco/drink/')
   ]
 
   .factory 'Drink', ->
