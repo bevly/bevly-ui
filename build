@@ -1,0 +1,6 @@
+#! /bin/bash
+
+set -e
+npm install
+bower install
+exec node ./node_modules/gulp/bin/gulp.js build

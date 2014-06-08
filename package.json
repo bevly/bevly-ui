@@ -2,6 +2,12 @@
   "name": "bevly-ui",
   "version": "1.0.0",
   "license": "BSD",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bevly/bevly-ui"
+  },
+
   "devDependencies": {
     "express": "4.4.x",
     "gulp": "^3.7.0",
