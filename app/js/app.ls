@@ -18,7 +18,8 @@ angular.module("DrinkMenu", [])
       rating = @rating(drink)
       if rating then "BA: #{rating}" else ''
 
-    abvDescription: (drink) -> "#{drink.abv}% ABV"
+    abvDescription: (drink) ->
+      if drink.abv > 0 then "#{drink.abv}% ABV" else ''
   
   .controller "DrinkController", ['$scope', '$location', 'Drink',
     'UrlSort', 'DrinkApi',

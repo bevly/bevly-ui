@@ -5,6 +5,8 @@ require! jade: 'gulp-jade'
 require! rename: 'gulp-rename'
 require! express
 require! httpRewrite: 'http-rewrite-middleware'
+require! proxy: 'proxy-middleware'
+require! url
 require
 
 appDist = './dist/app'
@@ -44,6 +46,13 @@ gtask 'jade', ->
 gtask 'stub', ->
   gsrc './stub/**/*', base: './stub'
     .pipe gulp.dest(appStub)
+
+gtask 'iserver', ['build'] ->
+  server = express()
+  server.use '/api/bevly', proxy(url.parse('http://localhost:3000'))  
+  server.use(express.static(appDist))
+  liveServer = server.listen 8181, ->
+    console.log("Started server on port #{liveServer.address().port}")
 
 gtask 'server', ['build'] ->
   server = express()
