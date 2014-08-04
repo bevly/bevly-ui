@@ -69,9 +69,13 @@ gtask 'server', ['build'] ->
 
 gtask 'serve', ['server']
 
-gtask 'watch', ['server'] ->
+
+gtask 'watch-compile' ->
   gulp.watch ['./app/js/**/*.ls'], ['livescript']
   gulp.watch ['bower_components/**/*'], ['vendor']
   gulp.watch ['app/css/**/*.scss'], ['sass']
   gulp.watch ['app/**/*.jade'], ['jade']
   gulp.watch ['stub/**/*'], ['stub']
+  
+gtask 'watch', ['server', 'watch-compile']
+gtask 'iwatch', ['iserver', 'watch-compile']
