@@ -1,4 +1,4 @@
-$border: #ccc;
+$border: #eee;
 $controlBackground: #fff;
 $selectedControlBackground: #e0e0e0;
 $drinkBackground: #fdfdfd;
@@ -84,14 +84,9 @@ ul.controls {
 #drink-list {
   .drink {
     background: $drinkBackground;
-    border-top: 1px solid $drinkBorder;
     font-size: 10px;
     padding: 1.3em 1.2em 1.3em 2em;
     min-height: 4.6em;
-
-    &.last {
-      border-bottom: 1px solid $border;
-    }
 
     .name {
       font-weight: bold;
