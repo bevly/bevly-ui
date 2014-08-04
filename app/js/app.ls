@@ -5,7 +5,7 @@ angular.module("DrinkMenu", [])
   ]
 
   .factory 'DrinkApi', ['$http', ($http) ->
-    getDrinks: -> $http.get('/api/bevly/frisco/drink/')
+    getDrinks: (source) -> $http.get("/api/bevly/#{source.id}/drink/")
   ]
 
   .factory 'Drink', ->
@@ -27,8 +27,9 @@ angular.module("DrinkMenu", [])
       $scope.Drink = Drink
       
       $scope.drinks = []
+      $scope.source = (name: "Frisco", id: "frisco")
 
-      DrinkApi.getDrinks()
+      DrinkApi.getDrinks($scope.source)
         .success (data) ->
           $scope.drinks = data.drinks
 
