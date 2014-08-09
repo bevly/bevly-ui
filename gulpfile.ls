@@ -1,16 +1,21 @@
 require! gulp
 require! browserify: 'gulp-browserify'
 require! sass: 'gulp-sass'
+require! csso: 'gulp-csso'
 require! jade: 'gulp-jade'
 require! rename: 'gulp-rename'
 require! express
 require! httpRewrite: 'http-rewrite-middleware'
 require! proxy: 'proxy-middleware'
+require! filter: 'gulp-filter'
+require! rev: 'gulp-rev'
+require! revReplace: 'gulp-rev-replace'
+require! rimraf
 require! url
-require
 
-appDist = './dist/app'
+appDist = './dist/app-tmp'
 appStub = './dist/stub'
+appOptimized = './dist/app'
 appVendor = "#{appDist}/vendor"
 
 dist = -> gulp.dest(appDist)
@@ -19,7 +24,21 @@ gsrc = gulp~src
 
 gtask 'default', ['build']
 
-gtask 'build', ['livescript', 'vendor', 'sass', 'jade', 'stub']
+gtask 'compile', ['livescript', 'vendor', 'sass', 'jade']
+gtask 'build', ['rev', 'stub']
+
+gtask 'clean', (cb) -> rimraf('dist', cb)
+
+gtask 'rev', ['compile'] ->
+  jsFilter = filter('**/*.js')
+  cssFilter = filter('**/*.css')
+  allButIndex = filter(['**/*', '!index.html'])
+  gsrc "#{appDist}/**/*"
+    .pipe allButIndex
+    .pipe rev()
+    .pipe allButIndex.restore()
+    .pipe revReplace()
+    .pipe gulp.dest(appOptimized)
 
 gtask 'livescript', ->
   gsrc './app/js/app.ls', read: false
@@ -36,6 +55,7 @@ gtask 'vendor', ->
 gtask 'sass', ->
   gsrc './app/css/**/*.scss', base: './app/css'
     .pipe sass()
+    .pipe csso()
     .pipe dist()
 
 gtask 'jade', ->
@@ -50,7 +70,7 @@ gtask 'stub', ->
 gtask 'iserver', ['build'] ->
   server = express()
   server.use '/api/bevly', proxy(url.parse('http://localhost:3000'))  
-  server.use(express.static(appDist))
+  server.use(express.static(appOptimized))
   liveServer = server.listen 8181, ->
     console.log("Started server on port #{liveServer.address().port}")
 
@@ -61,7 +81,7 @@ gtask 'server', ['build'] ->
     ...
   
   server.use httpRewrite.getMiddleware(rewriteRules, verbose: true)
-  server.use(express.static(appDist))
+  server.use(express.static(appOptimized))
   server.use(express.static(appStub))
   
   liveServer = server.listen 3000, ->
@@ -69,13 +89,16 @@ gtask 'server', ['build'] ->
 
 gtask 'serve', ['server']
 
-
 gtask 'watch-compile' ->
-  gulp.watch ['./app/js/**/*.ls'], ['livescript']
-  gulp.watch ['bower_components/**/*'], ['vendor']
-  gulp.watch ['app/css/**/*.scss'], ['sass']
-  gulp.watch ['app/**/*.jade'], ['jade']
-  gulp.watch ['stub/**/*'], ['stub']
+  watches =
+    './app/js/**/*.ls': ['livescript']
+    'bower_components/**/*': ['vendor']
+    'app/css/**/*.scss': ['sass']
+    'app/**/*.jade': ['jade']
+    'stub/**/*': ['stub']
+
+  for own watch, action of watches
+    gulp.watch(watch, action ++ ['rev'])
   
 gtask 'watch', ['server', 'watch-compile']
 gtask 'iwatch', ['iserver', 'watch-compile']
