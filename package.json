@@ -12,7 +12,6 @@
     "express": "4.4.x",
     "gulp": "^3.7.0",
     "gulp-browserify": "^0.5.0",
-    "gulp-clean": "^0.3.0",
     "gulp-concat": "^2.2.0",
     "gulp-csso": "^0.2.9",
     "gulp-filter": "^1.0.0",
