@@ -1,7 +1,7 @@
 .drinklist(ng-controller="DrinkController")
   section.header
     bev-select(model="selectedSource" options="availableSources"
-               display="name" prefix="Beer:" onchange="changeSource()")
+               display="name" onchange="changeSource()")
 
     ul.controls
       li(ng-repeat="sorter in sorters"

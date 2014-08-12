@@ -1,6 +1,7 @@
 $selectBackground: #f8f8fa;
 $selectColor: #ccc;
 $selectShadow: #aab;
+$selectLink: #aab;
 
 .bev-select-items {
   margin-left: 4px;
@@ -13,6 +14,17 @@ $selectShadow: #aab;
   background: $selectBackground;
   box-shadow: 0 2px 5px $selectShadow;
   display: none;
+}
+
+.bev-select {
+  position: relative;
+  .selected-display {
+    margin-left: 0.5em;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid $selectLink;
+  }
 }
 
 .select-prefix {

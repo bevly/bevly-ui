@@ -34,7 +34,7 @@ angular.module("BevSelect", [])
 
       showCombo = ->
         return unless scope.hidden
-        selSpan = element.find('span.selected')
+        selSpan = element.find('.selected-display')
         pos = selSpan.position()
         c = combo()
         jQuery(document.body).on 'click', comboDropFocus
