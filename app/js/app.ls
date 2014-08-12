@@ -84,6 +84,7 @@ angular.module("DrinkMenu", ['BevSelect'])
         loadDrinks()
 
       selectSourceWithId = (id) ->
+        id ?= $scope.availableSources[0]?.id
         return unless id
         for source in $scope.availableSources
           if source.id == id
