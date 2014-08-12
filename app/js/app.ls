@@ -47,7 +47,6 @@ angular.module("DrinkMenu", ['BevSelect'])
             $scope.drinks = data.drinks
             delete $scope.loadingDrinks
 
-      loadDrinks()
       $scope.changeSource = ->
         window.location.hash = "#{$scope.selectedSource.id}:#{Url.sortId()}"
         
