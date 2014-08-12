@@ -17,6 +17,7 @@ appDist = './dist/app-tmp'
 appStub = './dist/stub'
 appOptimized = './dist/app'
 appVendor = "#{appDist}/vendor"
+deployTarget = void
 
 dist = -> gulp.dest(appDist)
 gtask = gulp~task
@@ -32,11 +33,11 @@ gtask 'clean', (cb) -> rimraf('dist', cb)
 gtask 'rev', ['compile'] ->
   jsFilter = filter('**/*.js')
   cssFilter = filter('**/*.css')
-  allButIndex = filter(['**/*', '!index.html'])
+  allButIndexMap = filter(['**/*', '!index.html', '!**/*.map'])
   gsrc "#{appDist}/**/*"
-    .pipe allButIndex
+    .pipe allButIndexMap
     .pipe rev()
-    .pipe allButIndex.restore()
+    .pipe allButIndexMap.restore()
     .pipe revReplace()
     .pipe gulp.dest(appOptimized)
 
@@ -59,7 +60,7 @@ gtask 'sass', ->
     .pipe dist()
 
 gtask 'jade', ->
-  gsrc './app/*.jade'
+  gsrc './app/**/*.jade'
     .pipe jade()
     .pipe dist()
 
@@ -70,7 +71,7 @@ gtask 'stub', ->
 gtask 'iserver', ['build'] ->
   server = express()
   server.use '/api/bevly', proxy(url.parse('http://localhost:3000'))  
-  server.use(express.static(appOptimized))
+  server.use(express.static(deployTarget || appOptimized))
   liveServer = server.listen 8181, ->
     console.log("Started server on port #{liveServer.address().port}")
 
@@ -81,7 +82,8 @@ gtask 'server', ['build'] ->
     ...
   
   server.use httpRewrite.getMiddleware(rewriteRules, verbose: true)
-  server.use(express.static(appOptimized))
+  console.log("Serving static content from #{appOptimized}")
+  server.use(express.static(deployTarget || appOptimized))
   server.use(express.static(appStub))
   
   liveServer = server.listen 3000, ->
@@ -91,14 +93,18 @@ gtask 'serve', ['server']
 
 gtask 'watch-compile' ->
   watches =
-    './app/js/**/*.ls': ['livescript']
+    './app/**/*.ls': ['livescript']
     'bower_components/**/*': ['vendor']
     'app/css/**/*.scss': ['sass']
     'app/**/*.jade': ['jade']
     'stub/**/*': ['stub']
 
   for own watch, action of watches
-    gulp.watch(watch, action ++ ['rev'])
+    gulp.watch(watch, action)
+
+gtask 'deoptimize', ->
+  deployTarget := appDist
   
-gtask 'watch', ['server', 'watch-compile']
+gtask 'watch', ['deoptimize', 'server', 'watch-compile']
+gtask 'pwatch', ['server', 'watch-compile']
 gtask 'iwatch', ['iserver', 'watch-compile']

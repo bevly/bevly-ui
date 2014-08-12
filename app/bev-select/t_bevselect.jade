@@ -1,0 +1,7 @@
+h1.bev-select {{prefix}}
+  span.selected &nbsp;{{itemText(model)}}
+
+ul.bev-select-items
+  li.selectable(ng-repeat="item in options")
+    .select-prefix(ng-class="{selected: itemSelected(item)}")
+    button(ng-bind="itemText(item)" ng-click="selectItem(item)")

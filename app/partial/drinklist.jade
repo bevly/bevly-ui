@@ -1,14 +1,15 @@
 .drinklist(ng-controller="DrinkController")
   section.header
-    h1 {{source.name}} Beer List
+    bev-select(model="selectedSource" options="availableSources"
+               display="name" prefix="Beer:" onchange="changeSource()")
 
     ul.controls
       li(ng-repeat="sorter in sorters"
          ng-class="{selected: sortSelected(sorter.id), last: $last}")
-        a.sorter(href="#/{{sorter.id}}")
+        a.sorter(href="#/{{selectedSource.id}}:{{sorter.id}}")
           | {{sorter.title}}
 
-  ul#drink-list
+  ul#drink-list(ng-class="{loading: loadingDrinks}")
     li.drink(ng-repeat="drink in drinks | orderBy:ordering.key:ordering.reverse")
       a.name(href="{{drink.externalLink}}") {{drink.name}}
       .annotation

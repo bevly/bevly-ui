@@ -1,4 +1,5 @@
 $border: #eee;
+$bodyBackground: #fff;
 $controlBackground: #fff;
 $selectedControlBackground: #f4f4f4;
 $drinkBackground: #fff;
@@ -6,6 +7,11 @@ $drinkBorder: #eee;
 $abvColor: #a55;
 $ratingColor: #5a5;
 $typeColor: #888;
+$linkColor: #558;
+$selectBackground: #ffa;
+$loadingColor: #ccc;
+
+@import 'select';
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
@@ -33,7 +39,7 @@ h1 {
 }
 
 a {
-  color: #558;
+  color: $linkColor;
   text-decoration: none;
 }
 
@@ -81,44 +87,63 @@ ul.controls {
   }
 }
 
-#drink-list {
-  .drink {
-    background: $drinkBackground;
-    font-size: 10px;
-    padding: 1.3em 1.2em 1.3em 2em;
-    min-height: 4.6em;
+.drink {
+  background: $drinkBackground;
+  font-size: 10px;
+  padding: 1.3em 1.2em 1.3em 2em;
+  min-height: 4.6em;
+}
 
-    .name {
-      font-weight: bold;
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 20em;
-      float: left;
-    }
-    
-    .annotation {
-      display: block;
-      float: right;
-    }
+.name {
+  font-weight: bold;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20em;
+  float: left;
+}
 
-    .type {
-      clear: both;
-      float: left;
-      color: $typeColor;
-    }
+.annotation {
+  display: block;
+  float: right;
+}
 
-    .rating {
-      color: $ratingColor;
-      right: 2em;
-      top: 1em;
-    }
-    
-    .stat {
-      color: $abvColor;
-      right: 2em;
-      bottom: 1em;
-    }
-  }
+.type {
+  clear: both;
+  float: left;
+  color: $typeColor;
+}
+
+.rating {
+  color: $ratingColor;
+  right: 2em;
+  top: 1em;
+}
+
+.stat {
+  color: $abvColor;
+  right: 2em;
+  bottom: 1em;
+}
+
+.loading {
+  color: $loadingColor;
+}
+
+.header h1.page-title {
+  background: $selectBackground;
+  padding: 5px 10px;
+  margin-top: 0;
+}
+
+.source-select {
+  border: 0;
+  border-radius: 0;
+  background: $selectBackground;
+  font-size: 16px;
+  font-weight: normal;
+  white-space: normal;
+  text-align: center;
+  -webkit-appearance: none;
 }

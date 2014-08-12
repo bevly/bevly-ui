@@ -1,0 +1,37 @@
+$selectBackground: #f8f8fa;
+$selectColor: #ccc;
+$selectShadow: #aab;
+
+.bev-select-items {
+  margin-left: 4px;
+  margin-top: 4px;
+  position: absolute;
+  text-align: left;
+  list-style-type: none;
+  font-size: 16px;
+  top: -1.8em;
+  background: $selectBackground;
+  box-shadow: 0 2px 5px $selectShadow;
+  display: none;
+}
+
+.select-prefix {
+  display: inline-block;
+  width: 0.5em;
+
+  &.selected:before {
+    content: "\2713  ";
+  }
+}
+
+.selectable {
+  padding: 0.5em;
+  padding-bottom: 0.1em;
+  margin-bottom: 0.6em;
+  
+  button {
+    font-size: 16px;
+    border: 0;
+    background: $selectBackground;
+  }
+}

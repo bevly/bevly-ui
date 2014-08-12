@@ -1,7 +1,13 @@
-angular.module("DrinkMenu", [])
-  .factory 'UrlSort', ['$location', ($location) ->
+require '../bev-select/bevSelect'
+
+angular.module("DrinkMenu", ['BevSelect'])
+  .factory 'Url', ['$location', ($location) ->
+    normalizedPath: ->
+      ($location.path() || '').replace(/^\//, '')
     sortId: ->
-      ($location.path() || 'name').replace(/^\//, '')
+      @normalizedPath().split(':')[1] || 'name'
+    sourceId: ->
+      @normalizedPath().split(':')[0]
   ]
 
   .factory 'DrinkApi', ['$http', ($http) ->
@@ -22,17 +28,29 @@ angular.module("DrinkMenu", [])
       if drink.abv > 0 then "#{drink.abv}% ABV" else ''
   
   .controller "DrinkController", ['$scope', '$location', 'Drink',
-    'UrlSort', 'DrinkApi',
-    ($scope, $location, Drink, UrlSort, DrinkApi) !->
+    'Url', 'DrinkApi',
+    ($scope, $location, Drink, Url, DrinkApi) !->
       $scope.Drink = Drink
       
       $scope.drinks = []
-      $scope.source = (name: "Frisco", id: "frisco")
+      $scope.availableSources =
+        * name: 'Frisco', id: \frisco
+        * name: 'Ale House', id: \ale_house
+      $scope.selectedSource = $scope.availableSources[0]
 
-      DrinkApi.getDrinks($scope.source)
-        .success (data) ->
-          $scope.drinks = data.drinks
+      loadDrinks = ->
+        window.pscope = $scope
+        $scope.loadingDrinks = true
+        console.log("Loading drinks for #{$scope.selectedSource.id}")
+        DrinkApi.getDrinks($scope.selectedSource)
+          .success (data) ->
+            $scope.drinks = data.drinks
+            delete $scope.loadingDrinks
 
+      loadDrinks()
+      $scope.changeSource = ->
+        window.location.hash = "#{$scope.selectedSource.id}:#{Url.sortId()}"
+        
       $scope.sortSelected = (key) -> key == $scope.ordering.id
 
       subsortByName = (key, reverse) ->
@@ -61,6 +79,18 @@ angular.module("DrinkMenu", [])
       for sort in $scope.sorters
         $scope.sortMap[sort.id] = sort
 
-      applySort = -> $scope.sort(UrlSort.sortId())
-      $scope.$watch(UrlSort~sortId, applySort)
+      applySort = -> $scope.sort(Url.sortId())
+      applySource = ->
+        selectSourceWithId(Url.sourceId())
+        loadDrinks()
+
+      selectSourceWithId = (id) ->
+        return unless id
+        for source in $scope.availableSources
+          if source.id == id
+            $scope.selectedSource = source
+            break
+        
+      $scope.$watch(Url~sortId, applySort)
+      $scope.$watch(Url~sourceId, applySource)
   ]
