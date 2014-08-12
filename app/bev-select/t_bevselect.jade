@@ -5,5 +5,5 @@ ul.bev-select-items
   li.selectable(ng-repeat="item in options")
     button(ng-click="selectItem(item)")
       .select-prefix(ng-class="{selected: itemSelected(item)}")
-      {{itemText(item)}}
+      | {{itemText(item)}}
 
