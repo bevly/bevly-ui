@@ -2,14 +2,21 @@ $border: #eee;
 $bodyBackground: #fff;
 $controlBackground: #fff;
 $selectedControlBackground: #f4f4f4;
-$drinkBackground: #fff;
+$drinkBackground: #f5f5f5;
+$drinkBioBackground: #fff;
 $drinkBorder: #eee;
-$abvColor: #a55;
 $ratingColor: #5a5;
-$typeColor: #888;
+$subtextColor: #888;
 $linkColor: #558;
 $selectBackground: #ffa;
 $loadingColor: #ccc;
+$pourColor: #933;
+$abvColor: $pourColor;
+$descriptionBackground: $drinkBackground;
+$tabTextColor: #333;
+$selectedTabTextColor: #000;
+
+$borderColor: #ccc;
 
 @import 'select';
 
@@ -51,44 +58,20 @@ a {
   margin-bottom: 0.8em;
 }
 
-ul.controls {
-  display: inline-block;
-  background: $controlBackground;
-  border-radius: 1em;
-  border: 1px solid $border;
-  overflow: hidden;
-  
-  li {
-    display: inline-block;
-    border-right: 1px solid $border;
-
-    &.selected {
-      background: $selectedControlBackground;
-      a {
-        color: #000;
-        font-weight: bold;
-      }
-    }
-
-    &.last {
-      border-right: 0;
-    }
-
-    a {
-      display: block;
-      padding: 1em 1.5em;
-      width: 6.5em;
-      text-decoration: none;
-      color: #333;
-    }
-  }
-}
-
 .drink {
+  clear: both;
   background: $drinkBackground;
   font-size: 10px;
-  padding: 1.3em 1.2em 1.3em 2em;
+  padding: 0;
   min-height: 4.6em;
+  border-bottom: 1px solid $borderColor;
+}
+
+.bio {
+  padding: 5px 10px 0 10px;
+  background: $drinkBioBackground;
+  overflow: auto;
+  height: 3em;
 }
 
 .name {
@@ -110,7 +93,7 @@ ul.controls {
 .subtext {
   clear: both;
   float: left;
-  color: $typeColor;
+  color: $subtextColor;
 }
 
 .cell {
@@ -119,7 +102,7 @@ ul.controls {
 }
 
 .pour {
-  color: #933;
+  color: $pourColor;
 }
 
 .rating {
@@ -138,6 +121,16 @@ ul.controls {
   color: $loadingColor;
 }
 
+.description {
+  clear: both;
+  color: $subtextColor;
+  overflow: hidden;
+  height: 42px;
+  background: $descriptionBackground;
+  padding: 2px 10px;
+  font-size: 7px;
+}
+
 .page-title {
   background: $selectBackground;
   padding: 5px 10px;
@@ -153,4 +146,37 @@ ul.controls {
   white-space: normal;
   text-align: center;
   -webkit-appearance: none;
+}
+
+ul.controls {
+  display: inline-block;
+  background: $controlBackground;
+  border-radius: 1em;
+  border: 1px solid $border;
+  overflow: hidden;
+  
+  li {
+    display: inline-block;
+    border-right: 1px solid $border;
+
+    &.selected {
+      background: $selectedControlBackground;
+      a {
+        color: $selectedTabTextColor;
+        font-weight: bold;
+      }
+    }
+
+    &.last {
+      border-right: 0;
+    }
+
+    a {
+      display: block;
+      padding: 0.75em 1.25em;
+      width: 5.5em;
+      text-decoration: none;
+      color: $tabTextColor;
+    }
+  }
 }
