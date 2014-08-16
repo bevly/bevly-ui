@@ -34,7 +34,7 @@ angular.module("DrinkMenu", ['BevSelect'])
       if drink.abv > 0 then "#{drink.abv}% ABV" else ''
 
     description: (drink) ->
-      drink["#{@source}Description"] || drink.description
+      drink.rbDescription || drink["#{@source}Description"] || drink.description
 
   .controller "DrinkController", ['$scope', '$location', 'Drink',
     'Url', 'DrinkApi',
