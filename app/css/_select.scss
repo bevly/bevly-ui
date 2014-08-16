@@ -17,6 +17,7 @@ $selectLink: #aab;
 }
 
 .bev-select {
+  cursor: pointer;
   position: relative;
   .selected-display {
     margin-left: 0.5em;
@@ -47,4 +48,5 @@ $selectLink: #aab;
   font-size: 16px;
   border: 0;
   background: $selectBackground;
+  cursor: pointer;
 }

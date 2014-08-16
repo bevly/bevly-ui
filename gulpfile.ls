@@ -106,5 +106,5 @@ gtask 'deoptimize', ->
   deployTarget := appDist
   
 gtask 'watch', ['deoptimize', 'server', 'watch-compile']
+gtask 'iwatch', ['deoptimize', 'iserver', 'watch-compile']
 gtask 'pwatch', ['server', 'watch-compile']
-gtask 'iwatch', ['iserver', 'watch-compile']

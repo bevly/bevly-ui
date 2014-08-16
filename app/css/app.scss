@@ -31,6 +31,7 @@ body, html {
 ul, li {
   margin: 0;
   padding: 0;
+  list-style-type: none;
 }
 
 h1 {
@@ -59,7 +60,6 @@ ul.controls {
   
   li {
     display: inline-block;
-    list-style-type: none;
     border-right: 1px solid $border;
 
     &.selected {
@@ -99,6 +99,7 @@ ul.controls {
   text-overflow: ellipsis;
   max-width: 20em;
   float: left;
+  margin-right: 0.5em;
 }
 
 .annotation {
@@ -106,10 +107,19 @@ ul.controls {
   float: right;
 }
 
-.type {
+.subtext {
   clear: both;
   float: left;
   color: $typeColor;
+}
+
+.cell {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.pour {
+  color: #933;
 }
 
 .rating {

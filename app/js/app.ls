@@ -15,6 +15,10 @@ angular.module("DrinkMenu", ['BevSelect'])
   ]
 
   .factory 'Drink', ->
+    setSource: (source) -> @source = source
+
+    servingSize: (drink) -> drink["#{@source}ServingSize"]
+
     rating: (drink) ->
       if drink.ratingScore? && drink.ratingScore > 0
         drink.ratingScore
@@ -42,6 +46,7 @@ angular.module("DrinkMenu", ['BevSelect'])
         window.pscope = $scope
         $scope.loadingDrinks = true
         console.log("Loading drinks for #{$scope.selectedSource.id}")
+        Drink.setSource($scope.selectedSource.id)
         DrinkApi.getDrinks($scope.selectedSource)
           .success (data) ->
             $scope.drinks = data.drinks
