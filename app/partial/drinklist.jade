@@ -12,7 +12,7 @@
   ul#drink-list(ng-class="{loading: loadingDrinks}")
     li.drink(ng-repeat="drink in drinks | orderBy:ordering.key:ordering.reverse")
       section.bio
-        a.name(href="{{drink.externalLink}}") {{drink.name}}
+        a.name(href="{{Drink.link(drink)}}") {{drink.name}}
         .pour.cell {{Drink.servingSize(drink)}}
         .annotation
           .stat {{Drink.abvDescription(drink) || ''}}

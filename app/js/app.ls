@@ -15,30 +15,32 @@ angular.module("DrinkMenu", ['BevSelect'])
   ]
 
   .factory 'Drink', ->
+    link: (drink) -> drink.rbLink || drink.externalLink
     setSource: (source) -> @source = source
 
     servingSize: (drink) -> drink["#{@source}ServingSize"]
 
     rating: (drink) ->
-      if drink.ratingScore? && drink.ratingScore > 0
-        drink.ratingScore
+      ratings = drink.ratings
+      if ratings.rb? && ratings.rb? > 0
+        ratings.rb
       else null
 
     ratingDescription: (drink) ->
       rating = @rating(drink)
-      if rating then "BA: #{rating}" else ''
+      if rating then "RB: #{rating}" else ''
 
     abvDescription: (drink) ->
       if drink.abv > 0 then "#{drink.abv}% ABV" else ''
 
     description: (drink) ->
       drink["#{@source}Description"] || drink.description
-  
+
   .controller "DrinkController", ['$scope', '$location', 'Drink',
     'Url', 'DrinkApi',
     ($scope, $location, Drink, Url, DrinkApi) !->
       $scope.Drink = Drink
-      
+
       $scope.drinks = []
       $scope.availableSources =
         * name: 'Frisco', id: \frisco
@@ -57,7 +59,7 @@ angular.module("DrinkMenu", ['BevSelect'])
 
       $scope.changeSource = ->
         window.location.hash = "#{$scope.selectedSource.id}:#{Url.sortId()}"
-        
+
       $scope.sortSelected = (key) -> key == $scope.ordering.id
 
       subsortByName = (key, reverse) ->
@@ -98,7 +100,7 @@ angular.module("DrinkMenu", ['BevSelect'])
           if source.id == id
             $scope.selectedSource = source
             break
-        
+
       $scope.$watch(Url~sortId, applySort)
       $scope.$watch(Url~sourceId, applySource)
   ]
