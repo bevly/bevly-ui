@@ -15,6 +15,11 @@ angular.module("DrinkMenu", ['BevSelect'])
   ]
 
   .factory 'Drink', ->
+    menuAt: (drink) ->
+      menuTime = drink["#{@source}MenuAt"]
+      return unless menuTime
+      moment.duration(moment().diff(moment(menuTime))).humanize() + " ago"
+        
     link: (drink) -> drink.rbLink || drink.externalLink
     setSource: (source) -> @source = source
 

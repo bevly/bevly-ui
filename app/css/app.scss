@@ -132,6 +132,15 @@ a {
   background: $descriptionBackground;
 }
 
+.menu-at {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
 .description-mask {
   position: absolute;
   bottom: 0;
