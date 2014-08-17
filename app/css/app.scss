@@ -132,14 +132,6 @@ a {
   background: $descriptionBackground;
 }
 
-.menu-at {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.8);
-}
-
 .description-mask {
   position: absolute;
   bottom: 0;
@@ -148,6 +140,14 @@ a {
   height: 5px;
   background: linear-gradient(to top, rgba(255, 255, 255, 1),
                               rgba(255, 255, 255, 0));
+}
+
+.menu-at {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 3px 10px 3px 3px;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .page-title {
