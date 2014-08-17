@@ -4,6 +4,7 @@ $selectShadow: #aab;
 $selectLink: #aab;
 
 .bev-select-items {
+  z-index: 100;
   margin-left: 4px;
   margin-top: 4px;
   position: absolute;
