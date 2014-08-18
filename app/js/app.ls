@@ -15,10 +15,13 @@ angular.module("DrinkMenu", ['BevSelect'])
   ]
 
   .factory 'Drink', ->
+    menuTime: (drink) ->
+      drink["#{@source}MenuAt"]
+    
     menuAt: (drink) ->
-      menuTime = drink["#{@source}MenuAt"]
-      return unless menuTime
-      moment.duration(moment().diff(moment(menuTime))).humanize() + " ago"
+      time = @menuTime(drink)
+      return unless time
+      moment.duration(moment().diff(moment(time))).humanize() + " ago"
         
     link: (drink) -> drink.rbLink || drink.externalLink
     setSource: (source) -> @source = source
@@ -83,11 +86,13 @@ angular.module("DrinkMenu", ['BevSelect'])
 
       sorter \abv, -> it.abv || 100
       sorter \rating, -> Drink.rating(it) || 0
+      sorter \recent, -> Drink.menuTime(it) || ''
 
       $scope.sorters =
-        * id: 'name', title: 'Name', key: 'name'
-        * id: 'rating', title: 'Rating', key: $scope.sort.rating, reverse: true
-        * id: 'abv', title: 'ABV', key: $scope.sort.abv
+        * id: \name, title: 'Name', key: 'name'
+        * id: \rating, title: 'Rating', key: $scope.sort.rating, reverse: true
+        * id: \abv, title: 'ABV', key: $scope.sort.abv
+        * id: \recent, title: 'New', key: $scope.sort.recent, reverse: true
 
       $scope.sortMap = { }
       for sort in $scope.sorters
