@@ -117,10 +117,6 @@ a {
   bottom: 1em;
 }
 
-.loading {
-  color: $loadingColor;
-}
-
 .description {
   clear: both;
   position: relative;
@@ -198,4 +194,8 @@ ul.controls {
       color: $tabTextColor;
     }
   }
+}
+
+.loading * {
+  color: $loadingColor;
 }
