@@ -9,7 +9,7 @@ angular.module("BevSelect", [])
       id: '=id'
     templateUrl: 'bev-select/t_bevselect.html'
     
-    controller: ($scope, $timeout) ->
+    controller: ['$scope', '$timeout', ($scope, $timeout) ->
       $scope.itemText = (item) -> item[$scope.display ? 'name']
       $scope.itemId = (item) -> item[$scope.id ? 'id']
       $scope.itemSelected = (item) -> @itemId(item) == @itemId(@model)
@@ -18,6 +18,7 @@ angular.module("BevSelect", [])
           $scope.model = item
           console.log("New item: #{$scope.itemId(item)}")
           $timeout((-> $scope.change(item)), 0)
+      ]
       
     link: (scope, element, attrs) ->
       scope.prefix = attrs.prefix
