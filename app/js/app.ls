@@ -56,7 +56,6 @@ angular.module("DrinkMenu", ['BevSelect'])
       $scope.selectedSource = $scope.availableSources[0]
 
       loadDrinks = ->
-        window.pscope = $scope
         $scope.loadingDrinks = true
         console.log("Loading drinks for #{$scope.selectedSource.id}")
         Drink.setSource($scope.selectedSource.id)
