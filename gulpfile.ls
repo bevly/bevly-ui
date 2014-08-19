@@ -12,6 +12,7 @@ require! rev: 'gulp-rev'
 require! revReplace: 'gulp-rev-replace'
 require! rimraf
 require! url
+require! uglify: 'gulp-uglify'
 
 appDist = './dist/app-tmp'
 appStub = './dist/stub'
@@ -46,6 +47,7 @@ gtask 'livescript', ->
     .pipe browserify(transform: 'browserify-livescript',
                      extensions: '.ls',
                      debug: true)
+    .pipe uglify()
     .pipe rename('app.js')
     .pipe dist()
 
