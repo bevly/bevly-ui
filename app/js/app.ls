@@ -98,14 +98,12 @@ angular.module("DrinkMenu", ['BevSelect'])
         $scope.sortMap[sort.id] = sort
 
       applySort = -> $scope.sort(Url.sortId())
+      currentSource = -> Url.sourceId() || $scope.availableSources[0]?.id
       applySource = ->
-        selectSourceWithId(Url.sourceId())
+        selectSourceWithId(currentSource())
         loadDrinks()
 
-      currentSource = -> Url.sortId() || $scope.availableSources[0]?.id
-
       selectSourceWithId = (id) ->
-        id ?= $scope.availableSources[0]?.id
         return unless id
         for source in $scope.availableSources
           if source.id == id
