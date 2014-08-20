@@ -102,6 +102,8 @@ angular.module("DrinkMenu", ['BevSelect'])
         selectSourceWithId(Url.sourceId())
         loadDrinks()
 
+      currentSource = -> Url.sortId() || $scope.availableSources[0]?.id
+
       selectSourceWithId = (id) ->
         id ?= $scope.availableSources[0]?.id
         return unless id
@@ -111,5 +113,5 @@ angular.module("DrinkMenu", ['BevSelect'])
             break
 
       $scope.$watch(Url~sortId, applySort)
-      $scope.$watch(Url~sourceId, applySource)
+      $scope.$watch(currentSource, applySource)
   ]
