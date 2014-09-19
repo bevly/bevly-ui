@@ -64,6 +64,9 @@ angular.module("DrinkMenu", ['BevSelect'])
             $scope.drinks = data.drinks
             delete $scope.loadingDrinks
 
+      $scope.navigateTo = (pageTitle) ->
+        analytics.track 'Navigate', {to: pageTitle}
+
       $scope.changeSource = ->
         window.location.hash = "#{$scope.selectedSource.id}:#{Url.sortId()}"
 

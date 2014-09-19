@@ -6,7 +6,8 @@
     ul.controls
       li(ng-repeat="sorter in sorters"
          ng-class="{selected: sortSelected(sorter.id), last: $last}")
-        a.sorter(href="#/{{selectedSource.id}}:{{sorter.id}}")
+        a.sorter(ng-click="navigateTo(sorter.title)"
+          href="#/{{selectedSource.id}}:{{sorter.id}}")
           | {{sorter.title}}
 
   ul#drink-list(ng-class="{loading: loadingDrinks}")

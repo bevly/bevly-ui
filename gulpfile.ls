@@ -26,7 +26,7 @@ gsrc = gulp~src
 
 gtask 'default', ['build']
 
-gtask 'compile', ['livescript', 'vendor', 'sass', 'jade']
+gtask 'compile', ['livescript', 'js', 'vendor', 'sass', 'jade']
 gtask 'build', ['rev', 'stub']
 
 gtask 'clean', (cb) -> rimraf('dist', cb)
@@ -49,6 +49,10 @@ gtask 'livescript', ->
                      debug: true)
     .pipe uglify()
     .pipe rename('app.js')
+    .pipe dist()
+
+gtask 'js', ->
+  gsrc './app/js/analytics.js'
     .pipe dist()
 
 gtask 'vendor', ->
