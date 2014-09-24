@@ -5,12 +5,12 @@ html(ng-app="DrinkMenu")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     title Beer!
     link(rel="stylesheet" type="text/css" href="app.css")
-    script(src="analytics.js")
   body(ng-cloak)
     include partial/drinklist
     script(src="vendor/jquery/dist/jquery.min.js")
     script(src="vendor/moment/min/moment.min.js")
     script(src="vendor/angular/angular.min.js")
+    script(src="analytics.js")
     script(src="app.js")
     script(type="text/ng-template" id="bev-select/t_bevselect.html")
       include bev-select/t_bevselect
