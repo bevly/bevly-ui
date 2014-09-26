@@ -34,7 +34,8 @@ gtask 'clean', (cb) -> rimraf('dist', cb)
 gtask 'rev', ['compile'] ->
   jsFilter = filter('**/*.js')
   cssFilter = filter('**/*.css')
-  allButIndexMap = filter(['**/*', '!index.html', '!**/*.map'])
+  allButIndexMap = filter(['**/*', '!index.html',
+                           '!**/*.map', '!**/analytics.js'])
   gsrc "#{appDist}/**/*"
     .pipe allButIndexMap
     .pipe rev()
