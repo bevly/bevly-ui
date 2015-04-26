@@ -15,6 +15,8 @@ angular.module("DrinkMenu", ['BevSelect'])
   ]
 
   .factory 'Drink', ->
+    nbsp = String.fromCharCode(160)
+
     menuTime: (drink) ->
       drink["#{@source}MenuAt"]
 
@@ -26,7 +28,8 @@ angular.module("DrinkMenu", ['BevSelect'])
     link: (drink) -> drink.rbLink || drink.externalLink
     setSource: (source) -> @source = source
 
-    servingSize: (drink) -> drink["#{@source}ServingSize"]
+    servingSize: (drink) ->
+      (drink["#{@source}ServingSize"] || '').replace(/, /g, "#{nbsp}#{nbsp}#{nbsp}")
 
     rating: (drink) ->
       ratings = drink.ratings
