@@ -18,6 +18,8 @@ $selectedTabTextColor: #000;
 
 $borderColor: #f0f0f0;
 
+$titleSize: 1.2em;
+
 @import 'select';
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -76,7 +78,7 @@ a {
 
 .name {
   display: block;
-  font-size: 1.2em;
+  font-size: $titleSize;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -109,7 +111,7 @@ a {
 
 .stat {
   color: $abvColor;
-  font-size: 1.2em;
+  font-size: $titleSize;
   right: 2em;
   bottom: 1em;
 }
