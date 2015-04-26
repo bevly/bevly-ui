@@ -1,18 +1,18 @@
 require! gulp
-require! browserify: 'gulp-browserify'
-require! sass: 'gulp-sass'
-require! csso: 'gulp-csso'
-require! jade: 'gulp-jade'
-require! rename: 'gulp-rename'
+require! 'gulp-browserify': browserify
+require! 'gulp-sass': sass
+require! 'gulp-csso': csso
+require! 'gulp-jade': jade
+require! 'gulp-rename': rename
 require! express
-require! httpRewrite: 'http-rewrite-middleware'
-require! proxy: 'proxy-middleware'
-require! filter: 'gulp-filter'
-require! rev: 'gulp-rev'
-require! revReplace: 'gulp-rev-replace'
+require! 'http-rewrite-middleware': httpRewrite
+require! 'proxy-middleware': proxy
+require! 'gulp-filter': filter
+require! 'gulp-rev': rev
+require! 'gulp-rev-replace': revReplace
 require! rimraf
 require! url
-require! uglify: 'gulp-uglify'
+require! 'gulp-uglify': uglify
 
 appDist = './dist/app-tmp'
 appStub = './dist/stub'
@@ -77,7 +77,7 @@ gtask 'stub', ->
 
 gtask 'iserver', ['build'] ->
   server = express()
-  server.use '/api/bevly', proxy(url.parse('http://localhost:3000'))  
+  server.use '/api/bevly', proxy(url.parse('http://localhost:3000'))
   server.use(express.static(deployTarget || appOptimized))
   liveServer = server.listen 8181, ->
     console.log("Started server on port #{liveServer.address().port}")
@@ -87,12 +87,12 @@ gtask 'server', ['build'] ->
   rewriteRules =
     * from: '^(/api/.*?)/?([?].*)?$', to: '$1.json$2'
     ...
-  
+
   server.use httpRewrite.getMiddleware(rewriteRules, verbose: true)
   console.log("Serving static content from #{appOptimized}")
   server.use(express.static(deployTarget || appOptimized))
   server.use(express.static(appStub))
-  
+
   liveServer = server.listen 3000, ->
     console.log("Started server on port #{liveServer.address().port}")
 
@@ -111,7 +111,7 @@ gtask 'watch-compile' ->
 
 gtask 'deoptimize', ->
   deployTarget := appDist
-  
+
 gtask 'watch', ['deoptimize', 'server', 'watch-compile']
 gtask 'iwatch', ['deoptimize', 'iserver', 'watch-compile']
 gtask 'pwatch', ['server', 'watch-compile']

@@ -101,10 +101,6 @@ a {
   margin-right: 0.5em;
 }
 
-.pour {
-  color: $pourColor;
-}
-
 .rating {
   color: $ratingColor;
   right: 2em;
@@ -138,6 +134,17 @@ a {
                               rgba(255, 255, 255, 0));
 }
 
+.pour {
+  color: $pourColor;
+  font-size: 8px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 3px;
+  padding-left: 10px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
 .menu-at {
   position: absolute;
   right: 0;
@@ -169,7 +176,7 @@ ul.controls {
   border-radius: 1em;
   border: 1px solid $border;
   overflow: hidden;
-  
+
   li {
     display: inline-block;
     border-right: 1px solid $border;

@@ -14,16 +14,16 @@
     li.drink(ng-repeat="drink in (drinks | orderBy:ordering.key:ordering.reverse) track by drink.id")
       section.bio
         a.name(href="{{Drink.link(drink)}}") {{drink.name}}
-        .pour.cell {{Drink.servingSize(drink)}}
         .annotation
           .stat {{Drink.abvDescription(drink) || ''}}
-          
+
         .subtext
           .type.cell {{drink.type || ''}}
-          
+
         .annotation
           .rating {{Drink.ratingDescription(drink) || ''}}
 
       section.description {{Drink.description(drink)}}
         .description-mask
         .menu-at {{Drink.menuAt(drink)}}
+        .pour {{Drink.servingSize(drink)}}

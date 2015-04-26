@@ -17,12 +17,12 @@ angular.module("DrinkMenu", ['BevSelect'])
   .factory 'Drink', ->
     menuTime: (drink) ->
       drink["#{@source}MenuAt"]
-    
+
     menuAt: (drink) ->
       time = @menuTime(drink)
       return unless time
       moment.duration(moment().diff(moment(time))).humanize() + " ago"
-        
+
     link: (drink) -> drink.rbLink || drink.externalLink
     setSource: (source) -> @source = source
 
@@ -42,7 +42,7 @@ angular.module("DrinkMenu", ['BevSelect'])
       if drink.abv > 0 then "#{drink.abv}% ABV" else ''
 
     description: (drink) ->
-      drink.rbDescription || drink["#{@source}Description"] || drink.description
+      drink["#{@source}Description"] || drink.rbDescription || drink.description
 
   .controller "DrinkController", ['$scope', '$location', 'Drink',
     'Url', 'DrinkApi',
