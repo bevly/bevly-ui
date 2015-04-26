@@ -42,7 +42,7 @@ angular.module("DrinkMenu", ['BevSelect'])
       if rating then "RB: #{rating}" else ''
 
     abvDescription: (drink) ->
-      if drink.abv > 0 then "#{drink.abv}% ABV" else ''
+      if drink.abv > 0 then "#{drink.abv}%" else ''
 
     description: (drink) ->
       drink["#{@source}Description"] || drink.rbDescription || drink.description
